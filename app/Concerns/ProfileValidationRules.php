@@ -33,7 +33,7 @@ trait ProfileValidationRules
     }
     protected function surnameRules(): array
     {
-        return ['required', 'string', 'max:255'];
+        return ['required', 'string', 'max:125'];
     }
 
     /**
