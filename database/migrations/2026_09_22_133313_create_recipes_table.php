@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',100);
             $table->string('category',100);
-            $table->string('subgroup',255);
+            $table->foreignId('subgroup_id')->nullable()->constrained('subgroups')->nullOnDelete();
             $table->string('icon', 255);
             $table->string('ingredients',255);
             $table->timestamps();

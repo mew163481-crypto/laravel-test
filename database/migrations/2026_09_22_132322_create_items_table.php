@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',150);
             $table->string('icon', 255);
-            $table->string('subgroup',255);
+            $table->foreignId('subgroup_id')->nullable()->constrained('subgroups')->nullOnDelete();
             $table->integer('stack_size');
             $table->timestamps();
         });

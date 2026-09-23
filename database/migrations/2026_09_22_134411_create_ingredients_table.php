@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100);
-            $table->string('type',100);
+            $table->morphs('object');
+            $table->foreignId('recipe_id')->constrained('recipes')->cascadeOnDelete();
+
             $table->integer('amount');
             $table->integer('fluidbox_multiplier');
             $table->timestamps();
