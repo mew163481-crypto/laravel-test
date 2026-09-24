@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('crafting_category_id')->constrained('crafting_categories')->cascadeOnDelete();
         });
     }
-
     /**
      * Reverse the migrations.
      */
