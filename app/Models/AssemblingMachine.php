@@ -10,14 +10,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'name',
     'icon',
     'next_upgrade',
-    'crafting_category',
+    'fast_replaceable_group',
     'crafting_speed',
     'stack_size',
+    'subgroup_id',
 
 ])]
 class AssemblingMachine extends Model
 {
-    public function craftingcategory(): BelongsTo{
-        return $this->belongsTo( CraftingCategory::class );
+    public function subgroup(): BelongsTo{
+        return $this->belongsTo( Subgroup::class );
+    }
+    public function craftingCategories(): BelongsToMany{
+        return $this->belongsToMany( CraftingCategory::class, 'crafting_categories_to_assembling_machines' );
     }
 }

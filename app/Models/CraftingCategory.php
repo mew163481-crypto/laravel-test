@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 ])]
 class CraftingCategory extends Model
 {
-    public function assemblingmachine(): HasMany{
-        return $this->hasMany(AssemblingMachine::class);
+    public function ingredient(): HasOne{
+        return $this->hasMany(Recipe::class);
+    }
+    public function assemblingMachines(): BelongsToMany{
+        return $this->belongsToMany( AssemblingMachine::class, 'crafting_categories_to_assembling_machines' );
     }
 }

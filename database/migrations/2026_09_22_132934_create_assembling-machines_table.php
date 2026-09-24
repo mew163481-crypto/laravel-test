@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assembling-machines', function (Blueprint $table) {
+        Schema::create('assembling_machines', function (Blueprint $table) {
             $table->id();
             $table->string('name',150);
             $table->string('icon', 255);
-            $table->string('subgroup',255);
+            $table->foreignId('subgroup_id')->nullable()->constrained('subgroups')->nullOnDelete();
             $table->integer('stack_size');
             $table->string('next_upgrade',100);
             $table->integer('crafting_speed');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assembling-machines');
+        Schema::dropIfExists('assembling_machines');
     }
 };

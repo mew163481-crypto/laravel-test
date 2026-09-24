@@ -14,4 +14,8 @@ class Subgroup extends Model
     public function items(): HasMany{
         return $this->hasMany( Item::class );
     }
+    public function a(): HasMany{
+        return $this->hasMany( AssemblingMachine::class );
+    }
+
 }

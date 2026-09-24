@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('name',100);
-            $table->string('category',100);
+            $table->string('category_id')->nullable()->constrained('crafting-categories')->nullOnDelete();
             $table->foreignId('subgroup_id')->nullable()->constrained('subgroups')->nullOnDelete();
             $table->string('icon', 255);
             $table->string('ingredients',255);
