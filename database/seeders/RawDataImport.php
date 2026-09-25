@@ -21,37 +21,94 @@ class RawDataImport extends Seeder
             dump($key);
         }*/
         $assembling_machines =[];
-        $crafting_categories =[];
         $fluid =[];
-        $ingredient =[];
-        $item = [];
-        $recipe =[];
+        $ingredients =[];
+        $item =[];
+        $recipe_categories =[];
         $subgroup =[];
         $surface_conditions =[];
-        foreach ($json as $type => $objects) {
-            if($type=="item"){
-                $assembling_machines=$objects;
-            }if($type=="item"){
-                $crafting_categories=$objects;
-            }if($type=="fluid"){
-                $fluid=$objects;
-            }if($type=="ingredient"){
-                $ingredient=$objects;
-            }if($type=="item"){
-                $item=$objects;
-            }if($type=="recipe"){
-                $recipe=$objects;
-            }if($type=="subgroup"){
-                $subgroup=$objects;
-            }if($type=="item"){
-                $surface_conditions=$objects;
+        $results=[];
+
+        foreach ($json as $type => $objects){
+
+
+            if ($type =="assembling-machine"){
+                $assembling_machines =$objects;
             }
-
-            foreach ($objects as $name => $object) {
-
+            if ($type =="fluid"){
+                $fluid =$objects;
+            }
+            if ($type =="recipe"){
+                $ingredients =$objects;
+            }
+            if ($type =="item") {
+                $item =$objects;
+            }
+            if ($type =="recipe-category"){
+                $recipe_categories =$objects;
+            }
+            if ($type =="item-subgroup"){
+                $subgroup =$objects;
+            }
+            if ($type =="surface-condition"){
+                $surface_conditions =$objects;
             }
 
         }
-        dd($item);
+        foreach ($item as $name => $object) {
+
+            if(isset($object["subgroup"])&&$object["subgroup"]!="parameters"){
+
+                $item[$name] = [
+                    "type" => $object["type"],
+                    "name" => $object["name"],
+                    "icon" => isset($object["icon"]) ? $object["icon"] : null,
+                    "subgroup"=> isset($object["subgroup"]) ? $object["subgroup"] : null,
+                ];
+            }
+            if($object["type"]=="fluid" && $object["subgroup"]=="fluid" ){
+                $fluid[$name] = [
+                    "type" => $object["type"],
+                    "name" => $object["name"],
+                    "icon" => isset($object["icon"]) ? $object["icon"] : null,
+                    "subgroup"=> $object["subgroup"],
+                ];
+            }
+            if($object["type"]=="recipe-category"){
+                $recipe_categories[$name] = [
+                    "name" => $object["name"],
+                ];
+            }
+
+            if($object["type"]=="recipe"){
+                $ingredients[$name] = [
+                    "type" => $object["type"],
+                    "name" => $object["name"],
+                    "ingredients" => $object["ingredients"],
+                    "results"=> $object["results"],
+                ];
+            }
+            if($object["type"]=="assembling-machine"){
+                $assembling_machines[$name] = [
+                    "type" => $object["type"],
+                    "name" => $object["name"],
+                    "icon" => isset($object["icon"]) ? $object["icon"] : null,
+                    "next_upgrade"=>$object["next_upgrade"],
+                ];
+            }
+            if($object["type"]=="item-subgroup"){
+                $subgroup[$name] = [
+                    "type" => $object["type"],
+                    "name" => $object["name"],
+                    "group" => $object["group"],
+                ];
+            }
+
+        }
+        foreach ($item as $name => $object) {
+
+        }
+        dump($recipe_categories);
     }
+
 }
