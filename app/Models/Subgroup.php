@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
     'name',
+    'group',
 ])]
 class Subgroup extends Model
 {

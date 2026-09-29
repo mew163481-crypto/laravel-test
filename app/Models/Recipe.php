@@ -28,13 +28,13 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-    public function items(): MorphToMany
+    public function itemIngredients(): MorphToMany
     {
         return $this->morphedByMany(Item::class, 'object', 'ingredients')
             ->using(Ingredient::class );
     }
 
-    public function fluids(): MorphToMany
+    public function fluidIngredients(): MorphToMany
     {
         return $this->morphedByMany(Fluid::class, 'object', 'ingredients')
             ->using(Ingredient::class );
@@ -42,5 +42,21 @@ class Recipe extends Model
     public function craftingCategories(): HasOne
     {
         return $this->hasMany(CraftingCategory::class);
+    }
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    public function resultingItems(): MorphToMany
+    {
+        return $this->morphedByMany(Item::class, 'object', 'results')
+            ->using(Result::class );
+    }
+
+    public function resultingFluids(): MorphToMany
+    {
+        return $this->morphedByMany(Fluid::class, 'object', 'results')
+            ->using(Result::class );
     }
 }

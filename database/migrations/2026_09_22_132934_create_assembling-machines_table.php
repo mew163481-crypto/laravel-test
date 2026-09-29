@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('icon', 255);
             $table->foreignId('subgroup_id')->nullable()->constrained('subgroups')->nullOnDelete();
             $table->integer('stack_size');
-            $table->string('next_upgrade',100);
+            $table->string('next_upgrade',100)->nullable();
             $table->integer('crafting_speed');
             $table->timestamps();
         });

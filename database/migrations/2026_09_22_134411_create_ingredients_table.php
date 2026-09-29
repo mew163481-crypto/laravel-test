@@ -16,7 +16,7 @@ return new class extends Migration
             $table->morphs('object');
             $table->foreignId('recipe_id')->constrained('recipes')->cascadeOnDelete();
             $table->integer('amount');
-            $table->integer('fluidbox_multiplier');
+            $table->integer('fluidbox_multiplier')->nullable();
             $table->timestamps();
         });
     }

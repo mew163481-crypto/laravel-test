@@ -21,4 +21,8 @@ class Fluid extends Model
     public function recipes(): MorphToMany{
         return $this->morphToMany(Recipe::class, 'object', 'ingredients');
     }
+    public function results(): MorphMany
+    {
+        return $this->morphMany(Result::class, 'object');
+    }
 }

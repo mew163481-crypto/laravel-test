@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('crafting_categories_to_assembling_machines', function (Blueprint $table) {
-            $table->foreignId('assembling_machine_id')->constrained('assembling_machines')->cascadeOnDelete();
-            $table->foreignId('crafting_category_id')->constrained('crafting_categories')->cascadeOnDelete();
+            $table->foreignId('assembling_machine_id')->constrained('assembling_machines', indexName: "cc_to_am_am_foreign")->cascadeOnDelete();
+            $table->foreignId('crafting_category_id')->constrained('crafting_categories', indexName: "cc_to_am_cc_foreign")->cascadeOnDelete();
         });
     }
     /**
